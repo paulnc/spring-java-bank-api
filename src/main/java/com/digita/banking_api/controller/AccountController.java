@@ -98,11 +98,12 @@ public class AccountController {
     }
 
 
+
     // Build sheduleTransferfund REST API
     @PostMapping("/sheduleTransferfund")
     public ResponseEntity<String> scheduleTransfer(@RequestBody ScheduleTransferFundDto scheduleTransferFundDto){
         accountService.scheduleTransfer(scheduleTransferFundDto);
-        return ResponseEntity.ok("Schedule Transfer Successful");
+        return ResponseEntity.ok("Schedule Funds Transfer Successful");
     }
 
     // Build scheduleTransfers REST API

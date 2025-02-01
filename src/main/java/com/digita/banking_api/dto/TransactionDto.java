@@ -14,12 +14,15 @@
 
 package com.digita.banking_api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public record TransactionDto(Long id,
                              Long accountId,
                              double amount,
                              String transactionType,
+                             @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
                              LocalDateTime timestamp) {
     }
 

@@ -2,7 +2,7 @@
  * Copyright (c) 2025. Paul Nwabudike
  * Since: February 2025
  * Author: Paul Nwabudike
- * Name: ScheduleTransferRepository
+ * Name: JacksonConfig
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at   http://www.apache.org/licenses/LICENSE-2.0
@@ -12,17 +12,22 @@
  *
  */
 
-package com.digita.banking_api.repository;
+package com.digita.banking_api.config;
 
-import com.digita.banking_api.entity.ScheduleTransfer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
+@Configuration
+public class JacksonConfig {
 
+        @Bean
+        public ObjectMapper objectMapper() {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            return mapper;
+        }
+    }
 
-public interface ScheduleTransferRepository extends JpaRepository<ScheduleTransfer, Long> {
-   List<ScheduleTransfer> findByFromAccountIdOrderByTimestampDesc(Long fromAccountId);
-
-
-}
 

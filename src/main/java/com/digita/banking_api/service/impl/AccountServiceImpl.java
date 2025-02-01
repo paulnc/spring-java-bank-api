@@ -64,15 +64,16 @@ public class AccountServiceImpl implements AccountService {
     private ScheduleTransferRepository scheduleTransferRepository;
 
 
-
     private static final String TRANSACTION_TYPE_DEPOSIT = "DEPOSIT";
     private static final String TRANSACTION_TYPE_WITHDRAW = "WITHDRAW";
     private static final String TRANSACTION_TYPE_TRANSFER = "TRANSFER";
 
     public AccountServiceImpl(AccountRepository accountRepository,
-                              TransactionRepository transactionRepository) {
+                              TransactionRepository transactionRepository,
+                              ScheduleTransferRepository scheduleTransferRepository) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
+        this.scheduleTransferRepository = scheduleTransferRepository;
     }
 
     @Override
@@ -120,7 +121,7 @@ public class AccountServiceImpl implements AccountService {
                 .findById(id)
                 .orElseThrow(() -> new AccountException("Account does not exists"));
 
-        if(account.getBalance() < amount){
+        if (account.getBalance() < amount) {
             throw new RuntimeException("Insufficient amount");
         }
 
@@ -168,7 +169,7 @@ public class AccountServiceImpl implements AccountService {
         Account toAccount = accountRepository.findById(transferFundDto.toAccountId())
                 .orElseThrow(() -> new AccountException("Account does not exists"));
 
-        if(fromAccount.getBalance() < transferFundDto.amount()){
+        if (fromAccount.getBalance() < transferFundDto.amount()) {
             throw new RuntimeException("Insufficient Amount");
         }
         // Debit the amount from fromAccount object
@@ -205,19 +206,18 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void scheduleTransfer(ScheduleTransferFundDto scheduleTransferFundDto) {
 
+
         // Retrieve the account from which we send the amount
-        Account fromAccount = accountRepository
-                .findById(scheduleTransferFundDto.fromAccountId())
-                .orElseThrow(() -> new AccountException("Account does not exists"));
+        //      Account fromAccount = accountRepository
+        //            .findById(scheduleTransferFundDto.fromAccountId())
+        //          .orElseThrow(() -> new AccountException("Account does not exists"));
 
         // Retrieve the account to which we send the amount
-        Account toAccount = accountRepository.findById(scheduleTransferFundDto.toAccountId())
-                .orElseThrow(() -> new AccountException("Account does not exists"));
-
+        //Account toAccount = accountRepository.findById(scheduleTransferFundDto.toAccountId())
+        //      .orElseThrow(() -> new AccountException("Account does not exists"));
 
 
         String transferId = UUID.randomUUID().toString();
-
 
         ScheduleTransfer scheduleTransfer = new ScheduleTransfer();
         scheduleTransfer.setFromAccountId(scheduleTransferFundDto.fromAccountId());
