@@ -208,14 +208,27 @@ public class AccountServiceImpl implements AccountService {
 
 
         // Retrieve the account from which we send the amount
-        //      Account fromAccount = accountRepository
-        //            .findById(scheduleTransferFundDto.fromAccountId())
-        //          .orElseThrow(() -> new AccountException("Account does not exists"));
+             Account fromAccount = accountRepository
+                   .findById(scheduleTransferFundDto.fromAccountId())
+                 .orElseThrow(() -> new AccountException("Sender Account does not exists"));
 
         // Retrieve the account to which we send the amount
-        //Account toAccount = accountRepository.findById(scheduleTransferFundDto.toAccountId())
-        //      .orElseThrow(() -> new AccountException("Account does not exists"));
+        Account toAccount = accountRepository.findById(scheduleTransferFundDto.toAccountId())
+              .orElseThrow(() -> new AccountException("Receiver Account does not exists"));
 
+        if (fromAccount.getBalance() < scheduleTransferFundDto.amount()) {
+            throw new RuntimeException("Insufficient Amount");
+        }
+
+        LocalDateTime ldt1 = scheduleTransferFundDto.transferDate();
+        LocalDateTime ldt2 =  LocalDateTime.now();
+
+        int diff = ldt1.compareTo(ldt2);
+
+
+        if ( diff <= 0) {
+            throw new RuntimeException("Please choose a Date in the Future");
+        }
 
         String transferId = UUID.randomUUID().toString();
 
@@ -225,8 +238,6 @@ public class AccountServiceImpl implements AccountService {
         scheduleTransfer.setAmount(scheduleTransferFundDto.amount());
         scheduleTransfer.setTransferDate(scheduleTransferFundDto.transferDate());
         scheduleTransfer.setTransferId(transferId);
-
-
         scheduleTransfer.setTimestamp(LocalDateTime.now());
 
         scheduleTransferRepository.save(scheduleTransfer);

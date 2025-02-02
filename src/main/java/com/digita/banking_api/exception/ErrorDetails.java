@@ -14,11 +14,15 @@
 
 package com.digita.banking_api.exception;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
-public record ErrorDetails(LocalDateTime timestamp,
-                           String message,
-                           String details,
-                           String errorCode) {
+public record ErrorDetails(
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        LocalDateTime timestamp,
+        String message,
+        String details,
+        String errorCode) {
 }
 

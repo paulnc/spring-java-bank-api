@@ -42,7 +42,7 @@ A  bank api application developed using Spring Boot.
 
 ## API Endpoints
 
-The application will start on `http://localhost:8098`.
+The application will start on `http://localhost:8089` or any other unused port, if 8080 is not free.
 
 - **Create Account**: `POST /api/accounts`
 - **Get Account by ID**: `GET /api/accounts/{id}`
@@ -53,7 +53,7 @@ The application will start on `http://localhost:8098`.
 - **Delete Account**: `DELETE /api/accounts/{id}`
 - **Get Account Transactions**: `GET /api/accounts/{id}/transactions`
 - **Schedule a Transfer**: `POST /api/accounts/sheduleTransferfund`
-- **Get  Scheduled Transfers**: `GET /api/accounts/{id}/scheduleTransfer`
+- **Get List of Scheduled Transfers for an Account**: `GET /api/accounts/{id}/scheduleTransfer`
 
 
 
@@ -76,7 +76,7 @@ PUT /api/accounts/1/deposit
 Content-Type: application/json
 
 {
-  "amount": 1=00.00
+  "amount": 1000.00
 }
 ```
 
