@@ -220,15 +220,23 @@ public class AccountServiceImpl implements AccountService {
             throw new RuntimeException("Insufficient Amount");
         }
 
+        //Check the  transfer amount
+        if ( scheduleTransferFundDto.amount() <= 0 ) {
+            throw new RuntimeException("Please enter an  Amount greater than 0");
+        }
+
+
+        //Check the  transfer date
         LocalDateTime ldt1 = scheduleTransferFundDto.transferDate();
         LocalDateTime ldt2 =  LocalDateTime.now();
-
         int diff = ldt1.compareTo(ldt2);
-
 
         if ( diff <= 0) {
             throw new RuntimeException("Please choose a Date in the Future");
         }
+
+
+
 
         String transferId = UUID.randomUUID().toString();
 
