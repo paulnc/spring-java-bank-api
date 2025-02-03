@@ -34,25 +34,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/*
-@Service
-public class AccountServiceImpl implements AccountService {
-
-    private AccountRepository accountRepository;
-
-    @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
-
-    @Override
-    public AccountDto createAccount(AccountDto accountDto) {
-        Account account = AccountMapper.mapToAccount(accountDto);
-        Account savedAccount = accountRepository.save(account);
-        return AccountMapper.mapToAccountDto(savedAccount);
-    }
-}
-*/
 
 
 @Service
@@ -236,19 +217,36 @@ public class AccountServiceImpl implements AccountService {
         }
 
 
-
-
-        String transferId = UUID.randomUUID().toString();
+       // String transferId = UUID.randomUUID().toString();
 
         ScheduleTransfer scheduleTransfer = new ScheduleTransfer();
         scheduleTransfer.setFromAccountId(scheduleTransferFundDto.fromAccountId());
         scheduleTransfer.setToAccountId(scheduleTransferFundDto.toAccountId());
         scheduleTransfer.setAmount(scheduleTransferFundDto.amount());
         scheduleTransfer.setTransferDate(scheduleTransferFundDto.transferDate());
-        scheduleTransfer.setTransferId(transferId);
+        scheduleTransfer.setTransferId(UUID.randomUUID().toString());
         scheduleTransfer.setTimestamp(LocalDateTime.now());
-
         scheduleTransferRepository.save(scheduleTransfer);
+    }
+
+
+    @Override
+    public ScheduleTransferDto getScheduleTransferById(Long id) {
+
+        ScheduleTransfer scheduleTransfer = scheduleTransferRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("schedule Transfer does not exists"));
+        return ScheduleTansferMapper.mapToScheduleTransferDto(scheduleTransfer);
+    }
+
+    @Override
+    public void deleteScheduleTransferById(Long id) {
+
+        ScheduleTransfer scheduleTransfer = scheduleTransferRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("schedule Transfer does not exists"));
+
+        scheduleTransferRepository.deleteById(id);
     }
 
     @Override

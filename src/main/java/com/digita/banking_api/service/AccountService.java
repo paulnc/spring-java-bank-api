@@ -24,6 +24,10 @@ public interface AccountService {
 
     void scheduleTransfer(ScheduleTransferFundDto scheduleTransferFundDto);
 
+    ScheduleTransferDto getScheduleTransferById(Long id);
+
+     void deleteScheduleTransferById(Long id);
+
     List<ScheduleTransferDto> getScheduleTransfers(Long fromAccountId);
 
 

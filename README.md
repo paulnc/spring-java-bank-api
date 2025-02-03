@@ -13,7 +13,9 @@ A  bank api application developed using Spring Boot.
 - **Delete Account**: Deletes an account by its ID.
 - **Get Account Transactions**: Fetches a list of transactions associated with an account.
 - **Schedule a Transfer**: Schedule Transfer Funds between 2 accounts.
-- **Get  Scheduled Transfers**: Fetches a list of Scheduled Transfers associated with an account.
+- **Get Scheduled Transfer By Scheduled Transfers ID**: Fetch a Scheduled Transfers its ID.
+- **Delete Scheduled Transfer**: Deletes a Scheduled Transfer by its ID.
+- **Get List of Scheduled Transfers By Account ID**: Fetches a list of Scheduled Transfers associated with an account.
 
 ## Technologies Used
 
@@ -42,7 +44,7 @@ A  bank api application developed using Spring Boot.
 
 ## API Endpoints
 
-The application will start on `http://localhost:8089` or any other unused port, if 8080 is not free.
+The application will start on `http://localhost:8080` or any other unused port, if 8080 is not free.
 
 - **Create Account**: `POST /api/accounts`
 - **Get Account by ID**: `GET /api/accounts/{id}`
@@ -53,7 +55,9 @@ The application will start on `http://localhost:8089` or any other unused port, 
 - **Delete Account**: `DELETE /api/accounts/{id}`
 - **Get Account Transactions**: `GET /api/accounts/{id}/transactions`
 - **Schedule a Transfer**: `POST /api/accounts/sheduleTransferfund`
-- **Get List of Scheduled Transfers for an Account**: `GET /api/accounts/{id}/scheduleTransfer`
+- **Get Scheduled Transfer By Scheduled Transfer ID**: `GET /api/accounts/sheduleTransferfund`
+- **Delete Scheduled Transfer**: `DELETE /api/accounts/sheduleTransferfund.{id}`
+- **Get List of Scheduled Transfers By Account ID**: `GET /api/accounts/{id}/scheduleTransfer`
 
 
 
@@ -97,12 +101,27 @@ Schedule Transfer Funds**:
 POST /api/accounts/sheduleTransferfund
 Content-Type: application/json
 
+
 {
   "fromAccountId": 1,
   "toAccountId": 2,
-  "amount": 200.00,
-  "transferDate":"2025-05-31T22:36:37"
+  "amount": 95000.00,
+  "transferDate":"2025-03-11T12:20:15"
+
 }
+=====
+Sample Respose From Server:
+{
+    "id": 9,
+    "fromAccountId": 1,
+    "toAccountId": 2,
+    "amount": 95000.0,
+    "transferDate": "2025-03-11T12:20:15",
+    "transferId": "f7dfb666-d23e-4f4c-add1-af0af170d2c0",
+    "timestamp": "2025-02-02T18:23:35"
+}
+
+
 ```
 
 
