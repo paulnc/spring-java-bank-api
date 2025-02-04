@@ -1,6 +1,7 @@
 package com.digita.banking_api.service;
 
 import com.digita.banking_api.dto.*;
+import com.digita.banking_api.entity.ScheduleTransfer;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public interface AccountService {
 
     List<TransactionDto> getAccountTransactions(Long accountId);
 
-    void scheduleTransfer(ScheduleTransferFundDto scheduleTransferFundDto);
+
+    ScheduleTransfer createScheduleTransfer(ScheduleTransferDto scheduleTransferDto);
 
     ScheduleTransferDto getScheduleTransferById(Long id);
 

@@ -1,7 +1,12 @@
 package com.digita.banking_api.service.impl;
 
 import com.digita.banking_api.dto.ScheduleTransferDto;
+import com.digita.banking_api.dto.ScheduleTransferFundDto;
+import com.digita.banking_api.entity.Account;
 import com.digita.banking_api.entity.ScheduleTransfer;
+import com.digita.banking_api.exception.AccountException;
+import com.digita.banking_api.mapper.ScheduleTansferMapper;
+import com.digita.banking_api.repository.AccountRepository;
 import com.digita.banking_api.repository.ScheduleTransferRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,11 +20,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -38,6 +43,8 @@ class AccountServiceImplTest {
 
     @AfterEach
     void tearDown() {
+        Mockito.reset(scheduleTransferRepository);
+
     }
 
     @Test
@@ -69,11 +76,11 @@ class AccountServiceImplTest {
         s.setTimestamp(timeStampDate);
 
 
-        given(scheduleTransferRepository.findById(9L)).willReturn(Optional.of(s));
+        given(this.scheduleTransferRepository.findById(9L)).willReturn(Optional.of(s));
 
 
         //When
-        ScheduleTransferDto returnedScheduleTransferDto = accountService.getScheduleTransferById(9L);
+        ScheduleTransferDto returnedScheduleTransferDto = this.accountService.getScheduleTransferById(9L);
 
         //Then
         assertThat(returnedScheduleTransferDto.id()).isEqualTo(s.getId());
@@ -83,7 +90,10 @@ class AccountServiceImplTest {
         assertThat(returnedScheduleTransferDto.transferDate()).isEqualTo(s.getTransferDate());
         assertThat(returnedScheduleTransferDto.transferId()).isEqualTo(s.getTransferId());
         assertThat(returnedScheduleTransferDto.timestamp()).isEqualTo(s.getTimestamp());
-        verify(scheduleTransferRepository, times(1)).findById(9L);
+        verify(this.scheduleTransferRepository, times(1)).findById(9L);
 
     }
+
+
+
 }

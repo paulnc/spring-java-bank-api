@@ -2,7 +2,9 @@
 
 # Bank Application
 
-A  bank api application developed using Spring Boot.  
+A bank Api backed application developed using Spring Boot.  
+This project demonstrates basic banking financial  operations such as bank account management, transactions, fund transfers and scheduled fund transfers. 
+
 
 - **Create Account**: Allows users to create a new bank account.
 - **Get Account Details**: Fetches details of a specific account by its ID.

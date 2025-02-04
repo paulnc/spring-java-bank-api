@@ -26,7 +26,6 @@ import com.digita.banking_api.repository.AccountRepository;
 import com.digita.banking_api.repository.ScheduleTransferRepository;
 import com.digita.banking_api.repository.TransactionRepository;
 import com.digita.banking_api.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -185,9 +184,9 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public void scheduleTransfer(ScheduleTransferFundDto scheduleTransferFundDto) {
+    public ScheduleTransfer createScheduleTransfer(ScheduleTransferDto scheduleTransferDto) {
 
-
+/*
         // Retrieve the account from which we send the amount
              Account fromAccount = accountRepository
                    .findById(scheduleTransferFundDto.fromAccountId())
@@ -200,15 +199,16 @@ public class AccountServiceImpl implements AccountService {
         if (fromAccount.getBalance() < scheduleTransferFundDto.amount()) {
             throw new RuntimeException("Insufficient Amount");
         }
+*/
 
         //Check the  transfer amount
-        if ( scheduleTransferFundDto.amount() <= 0 ) {
+        if ( scheduleTransferDto.amount() <= 0 ) {
             throw new RuntimeException("Please enter an  Amount greater than 0");
         }
 
 
         //Check the  transfer date
-        LocalDateTime ldt1 = scheduleTransferFundDto.transferDate();
+        LocalDateTime ldt1 = scheduleTransferDto.transferDate();
         LocalDateTime ldt2 =  LocalDateTime.now();
         int diff = ldt1.compareTo(ldt2);
 
@@ -217,16 +217,17 @@ public class AccountServiceImpl implements AccountService {
         }
 
 
-       // String transferId = UUID.randomUUID().toString();
+       String transferId = UUID.randomUUID().toString();
 
         ScheduleTransfer scheduleTransfer = new ScheduleTransfer();
-        scheduleTransfer.setFromAccountId(scheduleTransferFundDto.fromAccountId());
-        scheduleTransfer.setToAccountId(scheduleTransferFundDto.toAccountId());
-        scheduleTransfer.setAmount(scheduleTransferFundDto.amount());
-        scheduleTransfer.setTransferDate(scheduleTransferFundDto.transferDate());
-        scheduleTransfer.setTransferId(UUID.randomUUID().toString());
+        scheduleTransfer.setFromAccountId(scheduleTransferDto.fromAccountId());
+        scheduleTransfer.setToAccountId(scheduleTransferDto.toAccountId());
+        scheduleTransfer.setAmount(scheduleTransferDto.amount());
+        scheduleTransfer.setTransferDate(scheduleTransferDto.transferDate());
+        scheduleTransfer.setTransferId(transferId);
         scheduleTransfer.setTimestamp(LocalDateTime.now());
         scheduleTransferRepository.save(scheduleTransfer);
+        return scheduleTransfer;
     }
 
 
