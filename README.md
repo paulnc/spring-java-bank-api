@@ -112,7 +112,7 @@ Content-Type: application/json
 
 }
 =====
-Sample Respose From Server:
+Sample Response From Server:
 {
     "id": 9,
     "fromAccountId": 1,

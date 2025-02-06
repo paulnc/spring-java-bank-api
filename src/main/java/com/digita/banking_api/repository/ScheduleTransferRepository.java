@@ -22,6 +22,7 @@ import java.util.List;
 
 public interface ScheduleTransferRepository extends JpaRepository<ScheduleTransfer, Long> {
    List<ScheduleTransfer> findByFromAccountIdOrderByTimestampDesc(Long fromAccountId);
+   ScheduleTransfer findByTransferId(String transferId);
 
 
 }

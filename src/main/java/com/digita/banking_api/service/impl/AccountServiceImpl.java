@@ -26,6 +26,7 @@ import com.digita.banking_api.repository.AccountRepository;
 import com.digita.banking_api.repository.ScheduleTransferRepository;
 import com.digita.banking_api.repository.TransactionRepository;
 import com.digita.banking_api.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -38,9 +39,11 @@ import java.util.stream.Collectors;
 @Service
 public class AccountServiceImpl implements AccountService {
 
+    @Autowired
     private AccountRepository accountRepository;
-
+    @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
     private ScheduleTransferRepository scheduleTransferRepository;
 
 
@@ -184,22 +187,22 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public ScheduleTransfer createScheduleTransfer(ScheduleTransferDto scheduleTransferDto) {
+    public ScheduleTransferDto createScheduleTransfer(ScheduleTransferDto scheduleTransferDto) {
 
-/*
+
         // Retrieve the account from which we send the amount
              Account fromAccount = accountRepository
-                   .findById(scheduleTransferFundDto.fromAccountId())
+                   .findById(scheduleTransferDto.fromAccountId())
                  .orElseThrow(() -> new AccountException("Sender Account does not exists"));
 
         // Retrieve the account to which we send the amount
-        Account toAccount = accountRepository.findById(scheduleTransferFundDto.toAccountId())
+        Account toAccount = accountRepository.findById(scheduleTransferDto.toAccountId())
               .orElseThrow(() -> new AccountException("Receiver Account does not exists"));
 
-        if (fromAccount.getBalance() < scheduleTransferFundDto.amount()) {
+        if (fromAccount.getBalance() < scheduleTransferDto.amount()) {
             throw new RuntimeException("Insufficient Amount");
         }
-*/
+
 
         //Check the  transfer amount
         if ( scheduleTransferDto.amount() <= 0 ) {
@@ -220,6 +223,8 @@ public class AccountServiceImpl implements AccountService {
        String transferId = UUID.randomUUID().toString();
 
         ScheduleTransfer scheduleTransfer = new ScheduleTransfer();
+        ScheduleTransfer scheduleTransfer2 = new ScheduleTransfer();
+
         scheduleTransfer.setFromAccountId(scheduleTransferDto.fromAccountId());
         scheduleTransfer.setToAccountId(scheduleTransferDto.toAccountId());
         scheduleTransfer.setAmount(scheduleTransferDto.amount());
@@ -227,7 +232,12 @@ public class AccountServiceImpl implements AccountService {
         scheduleTransfer.setTransferId(transferId);
         scheduleTransfer.setTimestamp(LocalDateTime.now());
         scheduleTransferRepository.save(scheduleTransfer);
-        return scheduleTransfer;
+
+
+         scheduleTransfer2 = scheduleTransferRepository.findByTransferId(transferId);
+
+        scheduleTransferDto = ScheduleTansferMapper.mapToScheduleTransferDto(scheduleTransfer2);
+        return scheduleTransferDto;
     }
 
 

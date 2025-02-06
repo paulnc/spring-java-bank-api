@@ -23,8 +23,7 @@ public interface AccountService {
 
     List<TransactionDto> getAccountTransactions(Long accountId);
 
-
-    ScheduleTransfer createScheduleTransfer(ScheduleTransferDto scheduleTransferDto);
+    ScheduleTransferDto createScheduleTransfer(ScheduleTransferDto scheduleTransferDto);
 
     ScheduleTransferDto getScheduleTransferById(Long id);
 

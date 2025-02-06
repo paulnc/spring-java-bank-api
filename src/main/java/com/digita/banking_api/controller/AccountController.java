@@ -27,9 +27,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
-    private AccountService accountService;
 
     @Autowired
+    private AccountService accountService;
+
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
@@ -103,12 +104,13 @@ public class AccountController {
 
     // Build sheduleTransferfund REST API
     @PostMapping("/sheduleTransferfund")
-    public ResponseEntity<String> createScheduleTransfer(@RequestBody ScheduleTransferDto scheduleTransferDto){
-        accountService.createScheduleTransfer(scheduleTransferDto);
-        return ResponseEntity.ok("Schedule Funds Transfer Successful");
+    public ResponseEntity<ScheduleTransferDto> createScheduleTransfer(@RequestBody ScheduleTransferDto scheduleTransferDto){
+        scheduleTransferDto = accountService.createScheduleTransfer(scheduleTransferDto);
+
+        ResponseEntity<ScheduleTransferDto> responseEntity = new ResponseEntity<>(scheduleTransferDto, HttpStatus.CREATED);
+        return responseEntity;
 
     }
-
 
     // Get Schedule Transfer fund by Schedule Transfer ID REST API
     @GetMapping("/sheduleTransferfund/{id}")
