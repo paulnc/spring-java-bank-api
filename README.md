@@ -14,17 +14,17 @@ This project demonstrates basic banking financial  operations such as bank accou
 - **Get All Accounts**: Retrieves a list of all accounts.
 - **Delete Account**: Deletes an account by its ID.
 - **Get Account Transactions**: Fetches a list of transactions associated with an account.
-- **Schedule a Transfer**: Schedule Transfer Funds between 2 accounts.
-- **Get Scheduled Transfer By Scheduled Transfers ID**: Fetch a Scheduled Transfers its ID.
-- **Delete Scheduled Transfer**: Deletes a Scheduled Transfer by its ID.
-- **Get List of Scheduled Transfers By Account ID**: Fetches a list of Scheduled Transfers associated with an account.
+- **Schedule a Transfer**: Schedule Transfer Funds between 2 accounts in a future date.
+- **Get future Scheduled Transfer By Scheduled Transfers ID**: Fetch a future Scheduled Transfer by its ID.
+- **Delete Scheduled Transfer**: Deletes a future Scheduled Transfer by its ID.
+- **Get List of Scheduled Transfers By Account ID**: Fetches a list of future Scheduled Transfers associated with an account.
 
 ## Technologies Used
 
 - **Java**: The primary programming language.
 - **Spring Boot**: Framework for building the REST API and managing dependencies.
 - **JPA/Hibernate**: For database interactions and ORM.
-- **MySQL Database**: Database for development and testing.
+- **MySQL Database**: Database for development and testing. Use this command ( CREATE DATABASE banking_api; ) to create the database.
 - **Maven**: Build and dependency management tool.
 
 ## Project Structure

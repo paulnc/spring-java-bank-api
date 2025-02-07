@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Assertions;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -33,6 +35,12 @@ class AccountServiceImplTest {
     @Mock
     ScheduleTransferRepository scheduleTransferRepository;
 
+    @Mock
+    private AccountRepository accountRepository;
+    @Mock
+    private ScheduleTansferMapper scheduleTansferMapper;
+
+
     @InjectMocks
     AccountServiceImpl accountService;
 
@@ -48,7 +56,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getScheduleTransferByIdSuccess() {
+    void testGetScheduleTransferById_Success() {
 
         //Given
 
@@ -93,7 +101,6 @@ class AccountServiceImplTest {
         verify(this.scheduleTransferRepository, times(1)).findById(9L);
 
     }
-
 
 
 }

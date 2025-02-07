@@ -189,7 +189,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ScheduleTransferDto createScheduleTransfer(ScheduleTransferDto scheduleTransferDto) {
 
-
         // Retrieve the account from which we send the amount
              Account fromAccount = accountRepository
                    .findById(scheduleTransferDto.fromAccountId())
