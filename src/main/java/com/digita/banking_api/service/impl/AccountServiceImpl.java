@@ -191,26 +191,26 @@ public class AccountServiceImpl implements AccountService {
 
         // Retrieve the account from which we send the amount
              Account fromAccount = accountRepository
-                   .findById(scheduleTransferDto.fromAccountId())
+                   .findById(scheduleTransferDto.getFromAccountId())
                  .orElseThrow(() -> new AccountException("Sender Account does not exists"));
 
         // Retrieve the account to which we send the amount
-        Account toAccount = accountRepository.findById(scheduleTransferDto.toAccountId())
+        Account toAccount = accountRepository.findById(scheduleTransferDto.getToAccountId())
               .orElseThrow(() -> new AccountException("Receiver Account does not exists"));
 
-        if (fromAccount.getBalance() < scheduleTransferDto.amount()) {
+        if (fromAccount.getBalance() < scheduleTransferDto.getAmount()) {
             throw new RuntimeException("Insufficient Amount");
         }
 
 
         //Check the  transfer amount
-        if ( scheduleTransferDto.amount() <= 0 ) {
+        if ( scheduleTransferDto.getAmount() <= 0 ) {
             throw new RuntimeException("Please enter an  Amount greater than 0");
         }
 
 
         //Check the  transfer date
-        LocalDateTime ldt1 = scheduleTransferDto.transferDate();
+        LocalDateTime ldt1 = scheduleTransferDto.getTransferDate();
         LocalDateTime ldt2 =  LocalDateTime.now();
         int diff = ldt1.compareTo(ldt2);
 
@@ -224,10 +224,10 @@ public class AccountServiceImpl implements AccountService {
         ScheduleTransfer scheduleTransfer = new ScheduleTransfer();
         ScheduleTransfer scheduleTransfer2 = new ScheduleTransfer();
 
-        scheduleTransfer.setFromAccountId(scheduleTransferDto.fromAccountId());
-        scheduleTransfer.setToAccountId(scheduleTransferDto.toAccountId());
-        scheduleTransfer.setAmount(scheduleTransferDto.amount());
-        scheduleTransfer.setTransferDate(scheduleTransferDto.transferDate());
+        scheduleTransfer.setFromAccountId(scheduleTransferDto.getFromAccountId());
+        scheduleTransfer.setToAccountId(scheduleTransferDto.getToAccountId());
+        scheduleTransfer.setAmount(scheduleTransferDto.getAmount());
+        scheduleTransfer.setTransferDate(scheduleTransferDto.getTransferDate());
         scheduleTransfer.setTransferId(transferId);
         scheduleTransfer.setTimestamp(LocalDateTime.now());
         scheduleTransferRepository.save(scheduleTransfer);

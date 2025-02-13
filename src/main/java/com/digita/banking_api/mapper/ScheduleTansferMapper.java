@@ -33,13 +33,13 @@ public class ScheduleTansferMapper {
 
     public static ScheduleTransfer mapToScheduleTransfer(ScheduleTransferDto scheduleTransferDto) {
         return new ScheduleTransfer(
-                scheduleTransferDto.id(),
-                scheduleTransferDto.fromAccountId(),
-                scheduleTransferDto.toAccountId(),
-                scheduleTransferDto.amount(),
-                scheduleTransferDto.transferDate(),
-                scheduleTransferDto.transferId(),
-                scheduleTransferDto.timestamp()
+                scheduleTransferDto.getId(),
+                scheduleTransferDto.getFromAccountId(),
+                scheduleTransferDto.getToAccountId(),
+                scheduleTransferDto.getAmount(),
+                scheduleTransferDto.getTransferDate(),
+                scheduleTransferDto.getTransferId(),
+                scheduleTransferDto.getTimestamp()
         );
     }
 

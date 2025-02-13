@@ -91,13 +91,13 @@ class AccountServiceImplTest {
         ScheduleTransferDto returnedScheduleTransferDto = this.accountService.getScheduleTransferById(9L);
 
         //Then
-        assertThat(returnedScheduleTransferDto.id()).isEqualTo(s.getId());
-        assertThat(returnedScheduleTransferDto.fromAccountId()).isEqualTo(s.getFromAccountId());
-        assertThat(returnedScheduleTransferDto.toAccountId()).isEqualTo(s.getToAccountId());
-        assertThat(returnedScheduleTransferDto.amount()).isEqualTo(s.getAmount());
-        assertThat(returnedScheduleTransferDto.transferDate()).isEqualTo(s.getTransferDate());
-        assertThat(returnedScheduleTransferDto.transferId()).isEqualTo(s.getTransferId());
-        assertThat(returnedScheduleTransferDto.timestamp()).isEqualTo(s.getTimestamp());
+        assertThat(returnedScheduleTransferDto.getId()).isEqualTo(s.getId());
+        assertThat(returnedScheduleTransferDto.getFromAccountId()).isEqualTo(s.getFromAccountId());
+        assertThat(returnedScheduleTransferDto.getToAccountId()).isEqualTo(s.getToAccountId());
+        assertThat(returnedScheduleTransferDto.getAmount()).isEqualTo(s.getAmount());
+        assertThat(returnedScheduleTransferDto.getTransferDate()).isEqualTo(s.getTransferDate());
+        assertThat(returnedScheduleTransferDto.getTransferId()).isEqualTo(s.getTransferId());
+        assertThat(returnedScheduleTransferDto.getTimestamp()).isEqualTo(s.getTimestamp());
         verify(this.scheduleTransferRepository, times(1)).findById(9L);
 
     }
