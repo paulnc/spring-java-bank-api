@@ -103,7 +103,7 @@ public class AccountController {
 
 
     // Build sheduleTransferfund REST API
-    @PostMapping("/sheduleTransferfund")
+    @PostMapping("/scheduleTransferfund")
     public ResponseEntity<ScheduleTransferDto> createScheduleTransfer(@RequestBody ScheduleTransferDto scheduleTransferDto){
         scheduleTransferDto = accountService.createScheduleTransfer(scheduleTransferDto);
 
@@ -113,14 +113,14 @@ public class AccountController {
     }
 
     // Get Schedule Transfer fund by Schedule Transfer ID REST API
-    @GetMapping("/sheduleTransferfund/{id}")
+    @GetMapping("/scheduleTransferfund/{id}")
     public ResponseEntity<ScheduleTransferDto> getScheduleTransferById(@PathVariable Long id){
         ScheduleTransferDto scheduleTransferDto = accountService.getScheduleTransferById(id);
         return ResponseEntity.ok(scheduleTransferDto);
     }
 
     // Delete Account REST API
-    @DeleteMapping("/sheduleTransferfund/{id}")
+    @DeleteMapping("/scheduleTransferfund/{id}")
     public ResponseEntity<String> deleteScheduleTransferById(@PathVariable Long id){
         accountService.deleteScheduleTransferById(id);
         return ResponseEntity.ok("Account is deleted successfully!");

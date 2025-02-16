@@ -33,9 +33,12 @@ This project demonstrates basic banking financial  operations such as bank accou
 - **DTO**: Data Transfer Objects used to transfer data between layers.
 - **Entity**: JPA entities representing the database tables.
 - **Exception**: Custom exception classes for error handling.
-- **Mapper**: Utility classes for mapping between entities and DTOs.
+- **Mapper**: Utility classes for mapping between entities and DTOs (Converting entities to DTOs & vice versa).
 - **Repository**: Interfaces for CRUD operations on entities.
 - **Service**: Business logic and service layer.
+- **Config**: Config Classes.
+- **Test**: Unit Tests for controller layer and service layer.
+
 
 ## Getting Started
 
@@ -56,9 +59,9 @@ The application will start on `http://localhost:8080` or any other unused port, 
 - **Get All Accounts**: `GET /api/accounts`
 - **Delete Account**: `DELETE /api/accounts/{id}`
 - **Get Account Transactions**: `GET /api/accounts/{id}/transactions`
-- **Schedule a Transfer**: `POST /api/accounts/sheduleTransferfund`
-- **Get Scheduled Transfer By Scheduled Transfer ID**: `GET /api/accounts/sheduleTransferfund`
-- **Delete Scheduled Transfer**: `DELETE /api/accounts/sheduleTransferfund.{id}`
+- **Schedule a Transfer**: `POST /api/accounts/scheduleTransferfund`
+- **Get Scheduled Transfer By Scheduled Transfer ID**: `GET /api/accounts/scheduleTransferfund`
+- **Delete Scheduled Transfer**: `DELETE /api/accounts/scheduleTransferfund.{id}`
 - **Get List of Scheduled Transfers By Account ID**: `GET /api/accounts/{id}/scheduleTransfer`
 
 
@@ -100,7 +103,7 @@ Content-Type: application/json
 
 Schedule Transfer Funds**:
 ```http
-POST /api/accounts/sheduleTransferfund
+POST /api/accounts/scheduleTransferfund
 Content-Type: application/json
 
 
@@ -113,6 +116,7 @@ Content-Type: application/json
 }
 =====
 Sample Response From Server:
+
 {
     "id": 9,
     "fromAccountId": 1,
